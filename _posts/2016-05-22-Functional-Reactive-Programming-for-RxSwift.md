@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Functional Reactive Programming for RxSwift"
-date: 2016-05-22 03:50:00 +0900
+date: 2016-05-22 03:50:00
 excerpt: "스톤즈 팀이 스터디한 내용을 이곳에 기록합니다"
 tags: [FRP, Functional Reactive Programming, 프로그래밍 패러다임, 함수형, Swift]
 comments: true
