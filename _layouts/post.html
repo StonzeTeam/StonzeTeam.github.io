@@ -17,7 +17,7 @@ layout: compress
             <div class="content">
                 <div class="post-title {% if page.feature %} feature {% endif %}">
                     <h1>{{ page.title }}</h1>
-                    <h4>{{ page.date | date_to_string }}</h4>
+                    <h4>{{ page.date | date: '%Y년 %m월 %d일' }}</h4>
                     {% if site.reading_time %}
                     <p class="reading-time">
                       <i class="fa fa-clock-o"></i>
