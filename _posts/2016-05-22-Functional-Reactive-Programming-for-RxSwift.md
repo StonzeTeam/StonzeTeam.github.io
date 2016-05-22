@@ -12,6 +12,7 @@ comments: true
 상당히 오래 우려먹은 주제이지만 스터디의 첫 주제로 FRP에 대해서 다뤘습니다.
 
 # 요약
+
 ## Functional Reactive Programming?
 함수형, Observable, Data Flow로 이루어진 **프로그래밍 패러다임**.
 
