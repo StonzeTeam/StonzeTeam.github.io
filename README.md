@@ -1,28 +1,12 @@
-# Moon Jekyll Theme
-    
-######(If you like this theme or using it, please give a :star: for motivation.)
+# Stonze Blog
 
-**[Moon](http://taylantatli.github.io/Moon)** is a minimal, one column jekyll theme.
+스톤즈 팀의 스터디를 기록하는 블로그 입니다.
 
-## Features
-* Minimal, you can focus on your content
-* Responsive
-* Disqus integration
-* Syntax highlighting
-* Optional post image
-* Social icons
-* Page for sharing projects
-* Optional background image
-* Simple navigation menu
-* MathJax support
+## 스터디원
+* 김지환
+* 장문익
+* 이인재
+* 이선협
 
-## Preview
-
-![screenshot of Moon](https://cloud.githubusercontent.com/assets/754514/14509720/61c61058-01d6-11e6-93ab-0918515ecd56.png)    
-![screenshot of Moon](https://cloud.githubusercontent.com/assets/754514/14509716/61ac6c8e-01d6-11e6-879f-8308883de790.png)
-
-See a [live version of Moon](http://taylantatli.github.io/Moon) hosted on GitHub.
-
-## Getting Started
-
-To learn how to install and use this theme check out the [Setup Guide](http://taylantatli.me/Moon/moon-theme/) for more information.
+## 블로그
+[Jekyll](jekyllrb.com)을 사용하여 만들었습니다.
