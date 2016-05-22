@@ -1,6 +1,6 @@
 # Site
 title:              StonzeBlog
-bio:                'Minimal, one column jekyll theme.'
+bio:                '스톤즈 팀의 스터디를 기록하는 블로그입니다.'
 description:        "스톤즈 팀의 스터디를 기록하는 블로그입니다."
 reading_time:       true
 words_per_minute:   200
@@ -41,18 +41,18 @@ disqus_shortname:   taylantatli
   #ad-slot:
 #bing-verify:
 #email:
-twitter:            username
-facebook:           username
-github:             username
+#twitter:            username
+#facebook:           username
+github:             StonzeTeam
 #stackoverflow:     123456/username   from a "http://stackoverflow.com/users/123456/username" link
 #linkedin:          username
 #xing:              username
-instagram:          username
+#instagram:          username
 #lastfm:            username
 #tumblr:            username
 #pinterest:         username
 #foursquare:        username
-steam:              username
+#steam:              username
 #dribbble:          username
 #youtube:           username
 #soundcloud:        username
