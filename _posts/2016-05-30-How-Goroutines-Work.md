@@ -4,7 +4,7 @@ title: "고루틴은 어떻게 동작하는가?"
 author: "김려은, 이선협"
 date: 2016-05-30 03:00:00
 excerpt: "http://blog.nindalf.com/how-goroutines-work/를 번역했습니다."
-tags: []
+tags: [Go, Goroutine, Thread]
 comments: true
 ---
 
