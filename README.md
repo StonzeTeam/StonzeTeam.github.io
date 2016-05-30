@@ -9,4 +9,4 @@
 * 이선협
 
 ## 블로그
-[Jekyll](jekyllrb.com)을 사용하여 만들었습니다.
+[Jekyll](http://jekyllrb.com)을 사용하여 만들었습니다. (번역 문서는 이쪽 http://jekyllrb-ko.github.io/)
