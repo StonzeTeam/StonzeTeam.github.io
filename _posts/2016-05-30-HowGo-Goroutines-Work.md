@@ -10,7 +10,7 @@ comments: true
 
 이번 스터디에서는 Goroutine의 동작 방법에 대해서 조사했습니다. 좀 더 많은 자료가 있지만 자세한 내용은 정리해서 올릴 예정입니다.
 
-출처: http://blog.nindalf.com/how-goroutines-work/
+출처: [http://blog.nindalf.com/how-goroutines-work/](http://blog.nindalf.com/how-goroutines-work/)
 
 # 서론
 
