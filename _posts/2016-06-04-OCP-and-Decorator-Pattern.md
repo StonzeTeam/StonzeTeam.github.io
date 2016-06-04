@@ -137,4 +137,17 @@ namespace DecoratorPattern {
 
 {% endhighlight %}
 
-작성 중 ....
+코드에서 우리는 Beverage를 통해서 Espresso를 만들었습니다. 그리고 여기에 Mocha 2, Whip 1을 추가하였습니다. 이때 주목할 점은 Espresso 다음 Mocha를 추가할 때입니다. Mocha를 추가하면 Mocha는 Espresso의 참조를 가집니다. 다음 Mocha를 추가하면 첫번째 Mocha를 참조합니다. Whip을 추가하면 두번째 Mocha를 참조합니다. Cost()를 호출하게 되면 참조를 따라서 Cost()을 호출하게 됩니다. 결국 추가된 Decorator의 모든 Cost()를 호출하여 결과를 계산합니다.
+만들고자 하는 음료가 있다면 우리는 위와 같은 방식으로 Decorator를 추가해주기만 하면됩니다. 단 가장 마지막에 추가한 Decorator에 추가하여야 합니다. 이를 그림으로 표현하면 다음과 같습니다.
+
+![Decorator Process](assets/img/DecoratorProcess.png)
+
+Beverage를 생성하고, Decorator로 Beverage를 포장한 후에 다음 Decorator로 다시 포장한다고 생각하면 편합니다. Decorator 추가는 손쉽게 할 수 있습니다. 생성 후에 참조만 전달하면 됩니다. 재료 Decorator만 준비되면 이제 어떤 조합도 어렵지 않게 만들어 낼 수 있습니다.
+OCP가 얼마나 잘 이루어지고 있는 생각해봅시다. 이제 우리는 재료는 Decorator를 추가하거나 수정하기만 하면 됩니다. Decorator의 수정이 Beverage에는 어떤 영향도 주지 않습니다. 확장에는 열려있고, 코드 변경에는 닫혀있습니다.
+그리고 Decorator Pattern은 상속과는 달리 동적으로 기능을 유연하게 확장할 수 있는 강점이 있습니다. 상속을 통한 기능 확장 및 수정은 정적일 수 밖에 없습니다. 하지만 위에서 확인할 수 있듯이 Decorator Pattern을 이용하면 Decorator 추가를 자유롭게 할 수 있기 때문에 Component를 마음대로 가지고 놀 수 있습니다.
+
+# Decorator Pattern is not a panacea, too.
+
+지금까지 살펴본 바에 따르면 Decorator Pattern은 자기가 감싸고 있는 Component의 method를 호출한 결과에 새로운 기능을 더 하기 때문에 기능 확장이 매우 요긴합니다. Decorator는 제한없이 추가할 수 있기 때문입니다. 하지만 단점 또한 존재합니다. 기능 추가가 Decorator를 통해서 이루어지기 때문에 자잘한 Decorator를 많이 생성해야하는 일이 생길 수도 있습니다. 기능 확장이 제한적이라면 상속을 통한 간단한 구현도 고려해볼만 합니다.
+
+참고자료: [위키피디아](https://en.wikipedia.org/wiki/Decorator_pattern), HeadFirst Design Pattern
