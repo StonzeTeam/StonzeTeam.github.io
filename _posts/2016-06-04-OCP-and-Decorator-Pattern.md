@@ -2,7 +2,7 @@
 layout: post
 title: "OCP와 Decorator Pattern"
 author: "장문익"
-date: 2016-06-04 03:00:00
+date: 2016-06-03 03:00:00
 excerpt: "Design Pattern의 중요한 원칙들 중의 하나인 OCP를 알아봅시다."
 tags: [Design Pattern, OCP, Open-Closed Principle, Decorator Pattern]
 comments: true
@@ -55,7 +55,8 @@ Decorator Pattern의 다이어그램을 그대로 적용하면 이해하기 쉬�
 
 이제 실제 코드로 살펴보겠습니다.
 
-{% highlight c# %}
+{% highlight csharp %}
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -135,10 +136,5 @@ namespace DecoratorPattern {
 }
 
 {% endhighlight %}
-
-
-
-
-
 
 작성 중 ....
