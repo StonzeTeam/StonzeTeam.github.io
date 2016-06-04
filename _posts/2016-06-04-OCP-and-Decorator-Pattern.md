@@ -140,7 +140,7 @@ namespace DecoratorPattern {
 코드에서 우리는 Beverage를 통해서 Espresso를 만들었습니다. 그리고 여기에 Mocha 2, Whip 1을 추가하였습니다. 이때 주목할 점은 Espresso 다음 Mocha를 추가할 때입니다. Mocha를 추가하면 Mocha는 Espresso의 참조를 가집니다. 다음 Mocha를 추가하면 첫번째 Mocha를 참조합니다. Whip을 추가하면 두번째 Mocha를 참조합니다. Cost()를 호출하게 되면 참조를 따라서 Cost()을 호출하게 됩니다. 결국 추가된 Decorator의 모든 Cost()를 호출하여 결과를 계산합니다.
 만들고자 하는 음료가 있다면 우리는 위와 같은 방식으로 Decorator를 추가해주기만 하면됩니다. 단 가장 마지막에 추가한 Decorator에 추가하여야 합니다. 이를 그림으로 표현하면 다음과 같습니다.
 
-![Decorator Process](assets/img/DecoratorProcess.png)
+![Decorator Process](/assets/img/DecoratorProcess.png)
 
 Beverage를 생성하고, Decorator로 Beverage를 포장한 후에 다음 Decorator로 다시 포장한다고 생각하면 편합니다. Decorator 추가는 손쉽게 할 수 있습니다. 생성 후에 참조만 전달하면 됩니다. 재료 Decorator만 준비되면 이제 어떤 조합도 어렵지 않게 만들어 낼 수 있습니다.
 OCP가 얼마나 잘 이루어지고 있는 생각해봅시다. 이제 우리는 재료는 Decorator를 추가하거나 수정하기만 하면 됩니다. Decorator의 수정이 Beverage에는 어떤 영향도 주지 않습니다. 확장에는 열려있고, 코드 변경에는 닫혀있습니다.
