@@ -39,11 +39,104 @@ Decorator Pattern의 정의는 다음과 같습니다. Decorator Pattern에서�
 
 ![alt text](https://www.dropbox.com/s/8jzejwn6g6yn0k7/960px-Decorator_UML_class_diagram.svg.png?dl=0)
 
-Decorator는 Component를 상속받습니다.
-Decorator는 Component를 참조할 변수가 있습니다.
-Decorator의 생성자에서 Component를 참조할 변수를 초기화할 수 있도록 전달해줍니다.
-Decorator 클래스는 자신의 method를 실행하고 Component를 참조하는 변수를 통해 다른 Decrator에 접근하여 method를 실행할 수 있습니다.
-ConcreteDecorator 클래스는 기능이 변경되어야 할 method를 override합니다.
+* Decorator는 Component를 상속받습니다.
+* Decorator는 Component를 참조할 변수가 있습니다.
+* Decorator의 생성자에서 Component를 참조할 변수를 초기화할 수 있도록 전달해줍니다.
+* Decorator 클래스는 자신의 method를 실행하고 Component를 참조하는 변수를 통해 다른 Decrator에 접근하여 method를 실행할 수 있습니다.
+* ConcreteDecorator 클래스는 기능이 변경되어야 할 method를 override합니다.
+
+# 문제 상황 해결
+
+Decorator Pattern을 적용하면 다음과 같습니다.
+
+![alt text](https://www.dropbox.com/s/xu3a6glb98o8lj0/decorator.png?dl=0)
+
+Decorator Pattern의 다이어그램을 그대로 적용하면 이해하기 쉬울 것입니다. Beverage가 Component로 사용합니다. 첨가되는 재료들은 Decorator입니다. 우리가 만들 음료들은 이제 Beverage를 상속받고, 재료 Decorator를 추가할 것입니다.
+
+이제 실제 코드로 살펴보겠습니다.
+
+{% highlight c# %}
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+public abstract class Beverage {
+    private string description;
+    public virtual string Description {
+        get { return description; }
+        set { description = value; }
+    }
+    public abstract double Cost();
+}
+
+public abstract class CondimentDecorator : Beverage {
+    private Beverage beverage;
+    public Beverage _Beverage { get; set; }
+}
+
+public class Espresso : Beverage {
+    public Espresso() {
+        Description = this.ToString();
+    }
+
+    public override double Cost() {
+        return 0.5;
+    }
+}
+
+public class HoseBlend : Beverage {
+    public HoseBlend() {
+        Description = this.ToString();
+    }
+
+    public override double Cost() {
+        return 0.8;
+    }
+}
+
+public class Mocha : CondimentDecorator {
+    public Mocha(Beverage beverage) {
+        this._Beverage = beverage;
+        Description = beverage.Description + ", " + this.ToString();
+    }
+
+    public override double Cost() {
+        return 1.0 + _Beverage.Cost();
+    }
+}
+
+public class Whip : CondimentDecorator {
+    public Whip(Beverage beverage) {
+        this._Beverage = beverage;
+        Description = beverage.Description + ", " + this.ToString();
+    }
+
+    public override double Cost() {
+        return 0.2 + _Beverage.Cost();
+    }
+}
+
+namespace DecoratorPattern {
+    class Program {
+        static void Main(string[] args) {
+            Beverage es = new Espresso();
+            Console.WriteLine(es.Description);
+            Console.WriteLine(es.Cost());
+
+            es = new Mocha(es);
+            es = new Mocha(es);
+            es = new Whip(es);
+            Console.WriteLine(es.Description);
+            Console.WriteLine(es.Cost());
+        }
+    }
+}
+
+{% endhighlight %}
+
+
 
 
 
