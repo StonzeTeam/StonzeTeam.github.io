@@ -22,7 +22,7 @@ OCP는 Open-Closed Principle의 줄임말입니다. 클래스는 확장에 대�
 
 우리가 카페을 운영한다고 가정합시다. 다양한 음료가 있을 것이고, 각 음료마다 만드는 방법도 다를 것이고, 가격 또한 다를 것입니다. 샷을 추가 하거나 휘핑크림을 올리면 가격을 추가될 것입니다. 이런 상황을 관리할 수 있는 프로그램을 만들어야 합니다. 음료를 클래스로 만들어 봅시다.
 
-![alt text](https://www.dropbox.com/s/8jzejwn6g6yn0k7/960px-Decorator_UML_class_diagram.svg.png?dl=0)
+![생각이 없는 Beverage](/assets/img/decorator_before.jpg)
 
 그림에서 볼 수 있듯이 각각의 음료마다 추가되는 재료가 다르기 때문에 가격을 계산하는 Cost() 함수는 각각의 음료가 override해야 합니다. 얼핏 봐도 좋지 않습니다. 개선하도록 합니다. 필요한 재료를 변수로 둡니다. 그리고 Beverage 클래스는 해당 재료가 음료에 사용되었는지의 여부에 따라서 Cost() 함수에서 가격에 반영할지 하지 않을지를 결정합니다. 이제 Beverage를 상속받는 음료들은 사용되는 재료가 있는지 없는지만 flag로 관리해주면 됩니다. 위의 다이어그램보다는 확실히 간략해졌습니다. 하지만 문제는 여전합니다.
 
@@ -37,7 +37,7 @@ OCP는 Open-Closed Principle의 줄임말입니다. 클래스는 확장에 대�
 
 Decorator Pattern의 정의는 다음과 같습니다. Decorator Pattern에서는 객체에 추가적인 요건을 '동적'으로 첨가합니다. Decorator는 서브 클래스를 만드는 것을 통해서 기능을 유연하게 확장할 수 있는 방법을 제공합니다. 
 
-![alt text](https://www.dropbox.com/s/8jzejwn6g6yn0k7/960px-Decorator_UML_class_diagram.svg.png?dl=0)
+![Decorator Diagram](/assets/img/960px-Decorator_UML_class_diagram.svg.png)
 
 * Decorator는 Component를 상속받습니다.
 * Decorator는 Component를 참조할 변수가 있습니다.
@@ -49,7 +49,7 @@ Decorator Pattern의 정의는 다음과 같습니다. Decorator Pattern에서�
 
 Decorator Pattern을 적용하면 다음과 같습니다.
 
-![alt text](https://www.dropbox.com/s/xu3a6glb98o8lj0/decorator.png?dl=0)
+![생각이 있는 Beverage](/assets/img/decorator.png)
 
 Decorator Pattern의 다이어그램을 그대로 적용하면 이해하기 쉬울 것입니다. Beverage가 Component로 사용합니다. 첨가되는 재료들은 Decorator입니다. 우리가 만들 음료들은 이제 Beverage를 상속받고, 재료 Decorator를 추가할 것입니다.
 
