@@ -16,11 +16,7 @@ comments: true
 일상생활에서도 제품군에 대한 예를 매우 많이 접할 수 있다. 자동차를 보자. 자동차의 제품군은 무엇일까? 모든 차가 그런 것은 아니겠지만 대부분의 자동차는 엔진, 기어 브레이크, 핸들, 바퀴 등등의 공통적인 구성품들로 이루어져 있다.
 이때 자동차를 이루는 공통적인 구성품들의 집합을 제품군으로 볼 수 있다.
 
-![자동차를 이루는 제품군](/assets/img/1.jpg)
-
-# OCP is not a panacea.
-
-![생각이 있는 Beverage](/assets/img/decorator.png)
+![자동차를 이루는 제품군](/assets/img/1.png)
 
 {% highlight csharp %}
 aaa
