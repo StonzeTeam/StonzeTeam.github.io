@@ -186,7 +186,6 @@ Worker* CreateWorker( Species MySpecies )
     return nullptr;
 }
  
- 
 int main( void )
 {
     Species         MySpecies       = Species::Zerg;
@@ -208,9 +207,9 @@ int main( void )
 ## 단점
 
 * 직접 생성하는 코드이므로 후에 추가, 수정, 변경, 삭제 등이 필요할때 해당 구현부분을 직접 찾아서 + 고쳐주어야한다.
-* 제4의 종족이 추가된다면 각각 본진과 일꾼을 생성해주는 코드를 찾아서 그 부분을 고쳐주어야한다.
+  * 제4의 종족이 추가된다면 각각 본진과 일꾼을 생성해주는 코드를 찾아서 그 부분을 고쳐주어야한다.
 * 하드코딩으로 생성하기 때문에 다른곳에서 객체 생성이 필요할시 코드의 중복이 발생한다.
-* melee, free for all, team 모드 등에서 각각 해당 코드가 중복될 수 있다.
+  * melee, free for all, team 모드 등에서 각각 해당 코드가 중복될 수 있다.
 * 위의 2가지의 단점으로 인해 실수발생 여지가 크며, 디버깅이 어렵다.
 
 단순히 객체 생성하는 코드만 있어서 왜 이러한 단점들이 크게 문제가 될까? 라고 생각하기 쉽다. 하지만 실제 코드는 훨씬 방대할 수 있으며 객체의 생성은 매우 다양한 곳에서 빈번하게 사용되어진다는 것을 감안해야한다. 즉 코드의 전체적인 부분에서 파편적으로 객체의 생성이 빈번하게 호출되면 해당 부분을 찾는것도, 해당 부분을 찾아서 고치는 것은 더욱더 부담이 되는 일일 수 있다.  
@@ -276,7 +275,6 @@ public:
  
         return nullptr;
     }
- 
 };
  
 int main( void )
@@ -330,7 +328,7 @@ Abstract Factory 패턴은 이런 클래스 상속의 장점을 활용하는 패
 * AbstractGameStartFactory  : 각 종족 제품군의 객체 생성 interaface를 제공하는 추상 클래스  
 * ZergGameStartFactory      : 저그 제품군 객체 생성 구현 클래스  
 * TerranGameStartFactory    : 테란 제품군 객체 생성 구현 클래스  
-* ProtossGameStartFactory   : 프로토스 제품군 객체 생성 구현 클래스    
+* ProtossGameStartFactory   : 프로토스 제품군 객체 생성 구현 클래스
 
 {% highlight cpp %}  
 
@@ -526,7 +524,7 @@ int main( void )
 * 제 4의 종족이 추가되려면 Factory Class 자체가 늘어난다.
 * 제 5, 6, 7 ...종족이 늘어날수록 Factory Class 자체의 갯수도 늘어난다.
 * Abstrac Factory 자체의 인터페이스가 변경되면 각 구현 Factory Class에서 변경된 인터페이스의 추가 및 수정을 해주어야한다.
-* 예를들어 게임 시작기 테란은 짐레이너, 저그는 캐리건, 프로토스는 테사다 를 영웅으로 준다고 룰이 바뀐다면?
+  * 예를들어 게임 시작기 테란은 짐레이너, 저그는 캐리건, 프로토스는 테사다 를 영웅으로 준다고 룰이 바뀐다면?
 
 Abstract Factory Pattern을 그림으로 나타내면 각각에 맞는 객체 생성 공장을 가지고 있고, 이 공장은 캡슐화되어있음을 의미한다.
 
