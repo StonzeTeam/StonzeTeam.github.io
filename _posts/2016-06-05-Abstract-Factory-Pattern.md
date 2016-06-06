@@ -33,6 +33,7 @@ Abstract Factory Pattern은 이런 제품군을 생성할때 유용하게 쓰이
 또한 각 종족에 맞게 알맞은 본진과 일꾼을 생성한다는 것을 어떻게 보장할 수 있을까?  
 
 ![스타1 - 저그면 해처리와 드론이 나와야함](/assets/img/3.png)  
+
 # Enum 및 Base Class 정의
 
 Sepicies      : 각 종족을 나타내는 Enum값  
