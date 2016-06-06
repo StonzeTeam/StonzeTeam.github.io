@@ -397,7 +397,7 @@ int main( void )
 	switch(MySpecies)
 	{
 	case Species::Zerg:
-		GameFactory		= new ZergGameStartFactory( );
+		GameFactory = new ZergGameStartFactory( );
 		break;
 	case Species::Terran:
 		GameFactory = new TerranGameStartFactory( );
