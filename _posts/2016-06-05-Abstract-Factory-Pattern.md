@@ -330,99 +330,7 @@ Abstract Factory 패턴은 이런 클래스 상속의 장점을 활용하는 패
 * TerranGameStartFactory    : 테란 제품군 객체 생성 구현 클래스  
 * ProtossGameStartFactory   : 프로토스 제품군 객체 생성 구현 클래스
 
-{% highlight cpp %}  
-
-#include <iostream>
-
-using namespace std;
-
-enum Species
-{
-	Zerg ,
-	Terran ,
-	Protoss ,
-	None ,
-};
-
-
-class Worker
-{
-public:
-	virtual void Work( ) = 0;
-};
-
-class Headquarters
-{
-};
-
-class Hatchery : public Headquarters
-{
-public:
-	Hatchery( )
-	{
-		cout << "내 본진은 해처리" << endl;
-	}
-};
-
-class CommandCenter : public Headquarters
-{
-public:
-	CommandCenter( )
-	{
-		cout << "내 본진은 커맨드 센터" << endl;
-	}
-};
-
-class Nexus : public Headquarters
-{
-public:
-	Nexus( )
-	{
-		cout << "내 본진은 넥서스" << endl;
-	}
-};
-
-class Drone : public Worker
-{
-public:
-	Drone( )
-	{
-		cout << " 난 드론 " << endl;
-	}
-
-	void Work( ) override
-	{
-		cout << "집게질 열심히해서 미네랄 캐자" << endl;
-	}
-};
-
-class Scv : public Worker
-{
-public:
-	Scv( )
-	{
-		cout << "난  SCV" << endl;
-	}
-
-	void Work( ) override
-	{
-		cout << "드릴 질 열심히 해서 미네랄 캐자" << endl;
-	}
-};
-
-class Probe : public Worker
-{
-public:
-	Probe( )
-	{
-		cout << "난 Probe" << endl;
-	}
-
-	void Work( ) override
-	{
-		cout << "레이져 질 열심히 해서 미네랄 캐자" << endl;
-	}
-};
+{% highlight cpp %}
 
 class AbstractGameStartFactory
 {
@@ -502,7 +410,7 @@ int main( void )
 	}
 
 	MyHeadquarters	= GameFactory->CreateHeadquarters( );
-	MyWorker		= GameFactory->CreateWorker( );
+	MyWorker	= GameFactory->CreateWorker( );
 
 	getchar( );
 	return 0;
@@ -524,7 +432,7 @@ int main( void )
 * 제 4의 종족이 추가되려면 Factory Class 자체가 늘어난다.
 * 제 5, 6, 7 ...종족이 늘어날수록 Factory Class 자체의 갯수도 늘어난다.
 * Abstrac Factory 자체의 인터페이스가 변경되면 각 구현 Factory Class에서 변경된 인터페이스의 추가 및 수정을 해주어야한다.
-  * 예를들어 게임 시작기 테란은 짐레이너, 저그는 캐리건, 프로토스는 테사다 를 영웅으로 준다고 룰이 바뀐다면?
+  * 예를들어 게임 시작시 테란은 짐레이너, 저그는 캐리건, 프로토스는 테사다 를 영웅으로 준다고 룰이 바뀐다면?
 
 Abstract Factory Pattern을 그림으로 나타내면 각각에 맞는 객체 생성 공장을 가지고 있고, 이 공장은 캡슐화되어있음을 의미한다.
 
@@ -539,7 +447,7 @@ Abstract Pattern은 객체 생성에 매우 유리한 클래스이나 단점 또
 
 * 객체 생성을위한 클래스는 인스턴스가 여러개일 필요가없다. 따라서 Singleton 패턴을 결합하여 고유한 클래스로 만들어 주면 좋다.
 * Factory Class 자체의 갯수가 늘어나는 단점은 Prototype pattern을 결합하여 해결가능하다. 하지만 Prototype pattern을 사용하면 Factory Class에서 생성하는 모든 인스턴스를 가지고 있어야 하므로 메모리 부담이 있을 수 있다. 또한 인스턴스를 제대로 정의하지 않으면 제품군에 맞는 객체들의 생성을 보장할 수 없다.
-* Factory Class의 인터페이스 변경시 모든 Factory Class의 변경은 다형성과 Prototype pattern을 사용하여 해결할 수 있다. 이에 대한 자세한 사항은 Prototype pattern에 대해 공부후 추후 알아보도록 한다.
+* Factory Class의 인터페이스 변경시 모든 Factory Class의 변경은 다형성과 Prototype pattern을 사용하여 해결할 수 있다. 이에 대한 자세한 사항은 Prototype pattern에 대해 공부한 뒤 알아보도록 한다.
 
 # 정리
 
