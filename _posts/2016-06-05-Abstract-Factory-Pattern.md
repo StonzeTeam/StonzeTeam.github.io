@@ -39,7 +39,7 @@ Sepicies      : 각 종족을 나타내는 Enum값
 Worker        : 일꾼을 나타내는 interface class(추상클래스)
 Headquarters  : 본진을 나타내는 interface class(base class)  
 
-{% highlight bash %}
+{% highlight cpp %}
 #include <iostream>
  
 using namespace std;
@@ -137,7 +137,7 @@ public:
 
 # 타입 조건 체크를 통한 직접 생성
 
-{% highlight bash %}
+{% highlight cpp %}
 Headquarters* CreateHeadquarters( Species MySpecies)
 {
     switch ( MySpecies )
@@ -217,7 +217,7 @@ int main( void )
 문제점이 생긴 이유는 변경될 가능성이 큰 부분이 여기저기에 퍼져있다는 것이다. OOP프로그래밍에서 캡슐화가 되어있지 않음을 의미한다. 캡슐화가 되어있지않으면 변경에 유연하지 않으며 정보은닉 또한 지켜질 수 없는 상황이 발생한다(직접 코딩된 곳을 보면 각 종족에 따라 어떤 객체들을 생성하는지 구체적인 내용들을 훤히 알 수 있다). 즉 변경될 가능성이 큰 부분을 한곳으로 모아 캡슐화하면 코드의 중복을 제거할 수 있으며, 파편화된 곳을 직접 전부 찾아 수정하는 문제점을 해결할 수 있다.   
 객체지향 설계에서 변경이 잦은 부분을 따로 캡슐화하여 관리할 수 있게 하는 강력한 도구로 클래스를 종종 이용한다. 변경될 가능성이 많은 부분에 대하여 클래스 내부로 숨겨 정보은닉의 효과 또한 가져올 수 있다. 물론 변경이 발생해도 해당 클래스의 내부만 고쳐주면 되므로 변경에도 유연하게 대처할 수 있다. 코드로 살펴보자.
 
-{% highlight bash %}
+{% highlight cpp %}
 class GameStartFactory
 {
 public:
@@ -319,7 +319,7 @@ Abstract Factory 패턴은 이런 클래스 상속의 장점을 활용하는 패
 * TerranGameStartFactory    : 테란 제품군 객체 생성 구현 클래스
 * ProtossGameStartFactory   : 프로토스 제품군 객체 생성 구현 클래스  
 
-{% highlight bash %}
+{% highlight cpp %}
 #include <iostream>
 
 using namespace std;
