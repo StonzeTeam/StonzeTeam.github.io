@@ -8,7 +8,7 @@ tags: [Design Pattern, 객체생성, Factory Pattern]
 comments: true
 ---
 
-앞으로 자주 공부하게 될 Design Pattern에도 중요한 원칙들이 있습니다. 이 원칙들은 각각의 Design Pattern이 추구하는 가치이기도 합니다.
+특정 조건이나 상황에 따라 알맞은 객체들을 생성하는데 유용한 패턴
 
 # 제품군 생성
 
