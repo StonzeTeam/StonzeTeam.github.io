@@ -35,9 +35,9 @@ Abstract Factory Pattern은 이런 제품군을 생성할때 유용하게 쓰이
 ![스타1 - 저그면 해처리와 드론이 나와야함](/assets/img/3.png)  
 # Enum 및 Base Class 정의
 
-Sepicies      : 각 종족을 나타내는 Enum값
-Worker        : 일꾼을 나타내는 interface class(추상클래스)
-Headquarters  : 본진을 나타내는 interface class(base class)  
+Sepicies      : 각 종족을 나타내는 Enum값  
+Worker        : 일꾼을 나타내는 interface class(추상클래스)  
+Headquarters  : 본진을 나타내는 interface class(base class)    
 
 {% highlight cpp %}
 #include <iostream>
@@ -314,10 +314,10 @@ Abstract Factory 패턴은 이런 클래스 상속의 장점을 활용하는 패
 * 위와 3가지 제품군 생성 클래스는 상위 추상 클래스를 상속받아 추상 클래스의 객체생성 인터페이스를 구현
   
 명시적으로 코드에서 확인해보도록 하자.
-* AbstractGameStartFactory  : 각 종족 제품군의 객체 생성 interaface를 제공하는 추상 클래스
-* ZergGameStartFactory      : 저그 제품군 객체 생성 구현 클래스
-* TerranGameStartFactory    : 테란 제품군 객체 생성 구현 클래스
-* ProtossGameStartFactory   : 프로토스 제품군 객체 생성 구현 클래스  
+* AbstractGameStartFactory  : 각 종족 제품군의 객체 생성 interaface를 제공하는 추상 클래스  
+* ZergGameStartFactory      : 저그 제품군 객체 생성 구현 클래스  
+* TerranGameStartFactory    : 테란 제품군 객체 생성 구현 클래스  
+* ProtossGameStartFactory   : 프로토스 제품군 객체 생성 구현 클래스    
 
 {% highlight cpp %}
 #include <iostream>
