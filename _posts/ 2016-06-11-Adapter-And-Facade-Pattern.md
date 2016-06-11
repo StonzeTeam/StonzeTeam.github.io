@@ -2,7 +2,7 @@
 layout: post
 title: "Adapter Pattern"
 author: "장문익"
-date: 2016-06-11 03:00:00
+date: 2016-06-10 03:00:00
 excerpt: "다른 두 인터페이스 간에 발생하는 호환성 문제를 해결해봅시다."
 tags: [Design Pattern, Adapter]
 comments: true
@@ -113,8 +113,10 @@ namespace DoFactory.GangOfFour.Adapter.Structural
 
 {% endhighlight %}
 
+구조는 매우 단순합니다. Adaptee 클래스를 호환시키기 위한 코드입니다. Adaptee 클래스를 호환시켜주는 Adapter 클래스를 살펴봅시다. Adapter 클래스는 기본적으로 Target 클래스를 상속하여 구현되어 있으며, Adaptee 클래스를 참조하고 있습니다. Target 클래스는 우리가 사용할 기본 interface입니다. Adapter 클래스가 없다면 우리는 직접적으로 Adaptee를 사용할 수가 없습니다.(코드에는 없지만 클라이언트가 Target를 기본적으로 사용한다고 가정합니다.) 우리가 사용할 수 있는 interface는 Target이 유일하기 때문입니다. 그래서 Adaptee를 사용하기 위해서 Adapter 클래스를 새롭게 추가하였습니다. Adatpter 클래스의 역할은 단순합니다. Adaptee를 Target처럼 사용할 수 있게 감쌉니다. Adapter로 감싸진 Adaptee는 문제없이 Target처럼 사용할 수 있습니다.
 
+#마무리하며
 
-
+Adapter Pattern은 반복해서 언급하였듯이 호환되지 않는 인터페이스를 사용하는 클라이언트를 그대로 활용할 수 있도록 해줍니다. 그 기능은 Adapter에 의해서 이루어집니다. Adaptee가 수정되어도 클라이언트에 미치는 영향은 없습니다. Adaptee는 Adapter에 의해서 캡슐화되어 있기 때문입니다. 클라이언트는 Adater에 대해서만 알지 Adaptee에 대해서는 전혀 모릅니다. 그리고 Adapter는 객체 구성(composition)을 사용합니다. Adaptee의 모든 서브 클래스는 Adapter에 의해 감쌀 수 있으므로 호환에 전혀 문제가 없습니다. Target 인터페이스를 잘 준수한다면 이를 기반으로 만들어진 클라이언트 간에 무리없이 적용할 수 있습니다. 물론 단점도 존재합니다. 만약 Target 인터페이스로 지원해야 하는 인터페이스의 크기가 커지면 Adapter 또한 필연적으로 커질 수 밖에 없습니다. 호환성을 확보하기 위해서 어쩔 수 없습니다. 그만큼 Adapter 역시 커질 수 밖에 없고, 클라이언트는 비대해진 Adapter를 사용하게 됩니다. 호환을 위해 수정한 Adater를 사용하기 위해서 클라이언트의 코드가 수정되어야 할지도 모릅니다. 이 작업도 Target 인터페이스가 크기에 비례할 것입니다. 그래서 이런 수정을 관리하는 또 다른 클래스를 만들면 어떨까 하는 생각이 들 수도 있습니다. 이는 다음에 다루게 될 Facade Pattern과 관련된 내용입니다.
 
 
