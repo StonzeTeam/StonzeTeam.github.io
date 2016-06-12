@@ -18,7 +18,7 @@ Adapter의 사전적인 정의는 다음과 같습니다.
 "Adapter는 호환되지 않는 두 가지의 인터페이스를 함께 사용할 수 있도록 도와줍니다."
 정의 자체는 다소 딱딱하게 느껴질 수도 있습니다. 하지만 Adapter는 다른 실생황에서 우리가 비교적 자주 접하는 용어입니다. 구글에서 'Adapter'라고 검색하면 다음 이미지가 가장 먼저 나타납니다.
 
-![Real Adapter](assests/img/adapter.jpeg)
+![Real Adapter](/assets/img/adapter.jpeg)
 
 요즘은 덜 사용하긴 하지만 과거 110V에서 220V로 변하던 시기에 많은 가전 제품의 전원코드는 220V 기본으로 사용하지만 110V 전원소켓에도 사용할 수 있도록 이런 Adapter를 함께 지급하였습니다. 우리가 알아볼 Adapter도 동일한 기능을 수행합니다. 정의 그대로 서로 호환되지 않는 두 가지 interface를 호환가능하도록 도와주는 것입니다.
 
@@ -33,7 +33,7 @@ Adapter Pattern은 한 클래스의 인터페이스를 다른 측에서 사용�
 
 #Adapter Pattern의 구조
 
-![ObjectAdapter](assets/img/ObjectAdapter.png)
+![ObjectAdapter](/assets/img/ObjectAdapter.png)
 
 구조는 매우 단순합니다. 구조에 대해서 앞의 문제 상황을 적용해서 간략하게 설명을 하겠습니다.
 
