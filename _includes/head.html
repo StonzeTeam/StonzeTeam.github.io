@@ -67,8 +67,9 @@ for(g=0;g<i.length;g++)f(c,i[g]);b._i.push([a,e,d])};b.__SV=1.2;a=e.createElemen
             localStorage.setItem('userId', userId);
         }
 
-        mixpanel.track(document.title);
         mixpanel.identify(userId);
         mixpanel.people.set_once('$first_name', userId);
+        
+        mixpanel.track(document.title);
     }});
 </script>
