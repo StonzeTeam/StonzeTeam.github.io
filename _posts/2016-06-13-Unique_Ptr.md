@@ -148,6 +148,9 @@ int main()
 위의 코드는 UniquePtr 생성시 커스텀 삭제자인 lambda함수를 같이 등록한다. 객체 해제는 CustomDel이라는 커스텀 삭제자를 통해서 하고 있는 모습이다.
 커스텀 삭제자를 사용할때 상태없는 함수객체(갈무리 없는 람다)를 사용한다면 unique_ptr의 크기 변화는 없다. 하지만 커스텀 삭제자가 상태를 가진 함수객체라면 해당 함수 객체에 저장된 상태의 크기만큼 unique_ptr의 크기도 증가한다.
 
+
+
+
 {% highlight cpp %}
 class WidgetClass
 {
@@ -180,6 +183,9 @@ int main()
 {% endhighlight %}
 위 코드처럼 갈무리 없는 람다를 사용하면 unique_ptr의 크기는 증가하지 않는다.
 ![unique_ptr_5](/assets/img/unique_ptr_5.png)
+
+
+
 
 {% highlight cpp %}
 class WidgetClass
@@ -217,6 +223,9 @@ int main()
 위 코드를 실행하여 unique ptr의 크기를 살펴보면 다음과 같이 temp1,temp2를 갈무리한 만큼의 크기가 더해진 것을 알 수 있다.
 
 ![unique_ptr_6](/assets/img/unique_ptr_6.png)
+
+
+
 
 {% highlight cpp %}
 class WidgetClass
@@ -261,7 +270,8 @@ int main()
 위코드를 실행해보면 함수 객체의 Temp 변수크기만큼 unique_ptr의 크기가 증가한 것을 알 수 있다.
 ![unique_ptr_4](/assets/img/unique_ptr_4.png)
 
-커스텀 삭제자로 함수객체를 이용했다. 사이즈를 확인하면 class Function에 있는 Temp 변수의 크기만큼 unique_ptr크기도 커진것을 알 수 있다.  
+커스텀 삭제자로 함수객체를 이용했다. 사이즈를 확인하면 class Function에 있는 Temp 변수의 크기만큼 unique_ptr크기도 커진것을 알 수 있다.
+
 이처럼 상태를 가진 함수 객체, 갈무리 있는 lambda를 커스텀 삭제자로 사용할 시 unique_ptr 크기도 매우 커질 수 있으므로 주의해아한다.
 
 # shared_ptr로의 자유로운 변환 
