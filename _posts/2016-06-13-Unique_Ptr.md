@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "AbstractFactoryPattern"
+title: "SmartPointer - unique_ptr"
 author: "이인재"
 date: 2016-06-13 03:00:00
 excerpt: "Smart Pointer - unique_ptr"
