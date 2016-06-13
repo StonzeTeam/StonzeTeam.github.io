@@ -35,17 +35,17 @@ weak_ptr<WidgetClass> pWeak_WidgetClass(pShared_WidgetClass);
 그렇다면 Raw Pointer보다 Smart Pointer를 사용을 지향해야 하는 이유에 무엇인지 알아보도록하자.
 
 # Raw Pointer의 문제점
-* 선언만 봐서는 하나의 객체를 가리키는지 배열을 가리키는지 구분할 수 없다. 이는 직접 delete시에 단일 객체 해제 : delete, 배열 객체 해제 : delete[]와도 연관이 있다.
+* 선언만 봐서는 하나의 객체를 가리키는지 배열을 가리키는지 구분할 수 없다.  이는 직접 delete시에 단일 객체 해제 : delete, 배열 객체 해제 : delete[]와도 연관이 있다.
 {% highlight cpp %}
 int* a  = nullptr;
 a       = new int;
 {% endhighlight %}
-위와 코드와 아래의 코드에서 int* a 라는 포인터 변수의 선언만으로는 단일 객체인지 배열을 가리키는지 알 수 없다.(직접 관리 필요)
+위의 코드와 아래의 코드에서 int* a 라는 포인터 변수의 선언만으로는 단일 객체인지 배열을 가리키는지 알 수 없다.(직접 관리 필요)
 {% highlight cpp %}
 int* a  = nullptr;
 a       = new int[100];
 {% endhighlight %}
-* 선언만 봐서는 포인터가 가라키는 객체가 존재하는 지에 대한 여부를 알 수 없다.
+* 선언만 봐서는 포인터가 가리키는 객체가 존재하는 지에 대한 여부를 알 수 없다.
 {% highlight cpp %}
 int* pNum  = new int;
 *pNum = 10;
@@ -53,6 +53,7 @@ delete pNum;
 cout << *pNum << endl;
 {% endhighlight %}
 위 코드에서 이미 pNum이 가리키는 객체는 메모리에서 해제되었는데 알 길이 없어서 미정의 동작을 유발한다.
+
 * 구체적으로 어떻게 해제해야 하는지 알 수 없다. 직접 delete를 해주어야하는지, 객체를 생성/삭제를 해주는 클래스에 위임을 해야하는 것인지 등등 객체 관리에 대해 알 수 없다. 알더라도 늘 객체의 메모리 해제시에 신경을 써주어야한다는 번거로움이 있다. 이는 실수를 유발할 수도 있고, 실수를 하게된다면 메모리릭 또는 중복 삭제 등등의 문제가 생길 수 있다.
 * 객체의 해제가 코드의 모든 경로에서 정확히 한 번 일어난다는 것을 보장할 수 없다.
 
@@ -60,10 +61,12 @@ Raw Pointer로 동적할당/해제를 할때에는 항상 메모리릭과 잘못
 
 # Smart Pointer
 Smart Pointer에는 다음 4종류가 있다.
+
 * auto_ptr
 * unique_ptr
 * shared_ptr
-* weak_ptr 이 있다. 
+* weak_ptr
+
 Smart Pointer의 공통점으로는 동적할당한 객체에 대한 관리를 한다는 것이다. 특히 해제에 대한 관리로 인해 메모리 릭이 생기지 않도록 설계되어 있다.
 
 참고 :  이중 auto_ptr은 엄밀히 말하면 smart pointer가 아니다. auto_ptr은 unique_ptr이 나오기 전부터 쓰여졌던 것이기 때문이다. 하지만 문제점과 사용성에 제한이 있어서 현재 c++ 표준 위원회에서는 잠정적 폐기 결론을 내렸다. 그리고 auto_ptr이 가지고 있던 기능은 unique_ptr로 모든것을 더 효율적으로 할 수 있다. auto_ptr이 가진 문제점들(예 : auto_ptr은 STL 컨테이너의 요소로 사용 못함)을 해결한것이 unique_ptr이기 때문에 auto_ptr은 사용하지 않는다.
@@ -86,12 +89,14 @@ pUnique_WidgetClass2 = pUnique_pWidgetClass;
 unique_ptr<WidgetClass> pUnique_pWidgetClass(new WidgetClass);
 unique_ptr<WidgetClass> pUnique_WidgetClass2 = std::move(pUnique_pWidgetClass);
 
-//pUnique_pWidgetClass가 가리키던 객체는 pUnique_WidgetClass2가 가리키게 되며, 기존의 pUnique_pWidgetClass는 Empty가 된다.
+//pUnique_pWidgetClass가 가리키던 객체는 pUnique_WidgetClass2가 가리키게 되며,
+//기존의 pUnique_pWidgetClass는 Empty가 된다.
 {% endhighlight %}
 
 위의 내용을 그림으로 나타내면 다음과 같다.
 ![unique_ptr_move1](/assets/img/unique_ptr_1.png)
 
+-------------------------------------------------------------------------------------------------
 ![unique_ptr_move2](/assets/img/unique_ptr_2.png)
 
 # raw pointer로의 복사/대입 연산 불가능 
