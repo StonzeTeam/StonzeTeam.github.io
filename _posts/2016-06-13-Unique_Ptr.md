@@ -72,7 +72,7 @@ Smart Pointer의 공통점으로는 동적할당한 객체에 대한 관리를 �
 참고 :  이중 auto_ptr은 엄밀히 말하면 smart pointer가 아니다. auto_ptr은 unique_ptr이 나오기 전부터 쓰여졌던 것이기 때문이다. 하지만 문제점과 사용성에 제한이 있어서 현재 c++ 표준 위원회에서는 잠정적 폐기 결론을 내렸다. 그리고 auto_ptr이 가지고 있던 기능은 unique_ptr로 모든것을 더 효율적으로 할 수 있다. auto_ptr이 가진 문제점들(예 : auto_ptr은 STL 컨테이너의 요소로 사용 못함)을 해결한것이 unique_ptr이기 때문에 auto_ptr은 사용하지 않는다.
 
 # unique_ptr 은 가리키는 객체에 대해 "독점 + 소유" 한다.
-unique_ptr은 소유한 객체 또는 배열에 대한 포인터를 저장한다. 해당 객체/배열은 다른 unique_ptr로 소유권을 이전하지 않는한 독점적으로 소유하게 된다. 그리고 객체/배열의 소멸 시점은 unique_ptr이 소멸될 때 같이 소멸된다. 즉 unique_ptr은 리소스를 고유하게 관리한다. 하나의 객체를 둘이상의 unique_ptr로 가리킬 수 없다는 뜻이다. 따라서 포인터의 복사는 불가능하며 이동만이 가능하다. 만약 복사가 가능하다면 중복으로 해체할 경우 미정의 동작에 빠지게 될 수 있기 때문이다.
+unique_ptr은 소유한 객체 또는 배열에 대한 포인터를 저장한다. 해당 객체/배열은 다른 unique_ptr로 소유권을 이전하지 않는한 독점적으로 소유하게 된다. 그리고 객체/배열의 소멸 시점은 unique_ptr이 소멸될 때 같이 소멸된다. 즉 unique_ptr은 리소스를 고유하게 관리한다. 하나의 객체를 둘이상의 unique_ptr로 가리킬 수 없다는 뜻이다. 따라서 포인터의 복사는 불가능하며 이동만이 가능하다. 만약 복사가 가능하다면 중복으로 해제할 경우 미정의 동작에 빠지게 될 수 있기 때문이다.
 {% highlight cpp %}
 unique_ptr<WidgetClass> pUnique_pWidgetClass(new WidgetClass);
 unique_ptr<WidgetClass> pUnique_WidgetClass2 = pUnique_pWidgetClass;
@@ -83,7 +83,7 @@ unique_ptr<WidgetClass> pUnique_pWidgetClass(new WidgetClass);
 unique_ptr<WidgetClass> pUnique_WidgetClass2;
 pUnique_WidgetClass2 = pUnique_pWidgetClass;
 {% endhighlight %}
-위의 두 코드는 컴파일 에러가 난다. unique_ptr을 복사하려고 하기 때문이다. 복사한다는 것은 소유권을 2개이상의 포인터가 가지고 있다는 얘기인데 이는 unique_ptr의 독점한다는 의도와 맞지 않기 때문이다.
+위의 두 코드는 컴파일 에러가 난다. unique_ptr을 복사/대입하려고 하기 때문이다. 복사한다는 것은 소유권을 2개이상의 포인터가 가지고 있다는 얘기인데 이는 unique_ptr의 독점한다는 의도와 맞지 않기 때문이다.
 따라서 포인터의 소유권을 옮기는 것만 가능하다. 이것은 std::move 를 통해서 간단하게 실행할 수 있다. std::move는 이동시맨틱을 지원하는 함수이다. (이동 시맨틱은 추후 따로 알아보도록 한다)
 {% highlight cpp %}
 unique_ptr<WidgetClass> pUnique_pWidgetClass(new WidgetClass);
@@ -96,7 +96,7 @@ unique_ptr<WidgetClass> pUnique_WidgetClass2 = std::move(pUnique_pWidgetClass);
 위의 내용을 그림으로 나타내면 다음과 같다.
 ![unique_ptr_move1](/assets/img/unique_ptr_1.png)
 
--------------------------------------------------------------------------------------------------
+---
 ![unique_ptr_move2](/assets/img/unique_ptr_2.png)
 
 # raw pointer로의 복사/대입 연산 불가능 
