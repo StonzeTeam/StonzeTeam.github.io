@@ -3,7 +3,7 @@ layout: post
 title: "SmartPointer - unique_ptr"
 author: "이인재"
 date: 2016-06-13 03:00:00
-excerpt: "Smart Pointer - unique_ptr"
+excerpt: "소유권 독점 자원의 관리에 유용한 smart pointer"
 tags: [C++, Pointer, SmartPointer, unique_ptr]
 comments: true
 ---
@@ -96,7 +96,8 @@ unique_ptr<WidgetClass> pUnique_WidgetClass2 = std::move(pUnique_pWidgetClass);
 위의 내용을 그림으로 나타내면 다음과 같다.
 ![unique_ptr_move1](/assets/img/unique_ptr_1.png)
 
---
+---
+
 ![unique_ptr_move2](/assets/img/unique_ptr_2.png)
 
 # raw pointer로의 복사/대입 연산 불가능 
@@ -148,7 +149,7 @@ int main()
 위의 코드는 UniquePtr 생성시 커스텀 삭제자인 lambda함수를 같이 등록한다. 객체 해제는 CustomDel이라는 커스텀 삭제자를 통해서 하고 있는 모습이다.
 커스텀 삭제자를 사용할때 상태없는 함수객체(갈무리 없는 람다)를 사용한다면 unique_ptr의 크기 변화는 없다. 하지만 커스텀 삭제자가 상태를 가진 함수객체라면 해당 함수 객체에 저장된 상태의 크기만큼 unique_ptr의 크기도 증가한다.
 
---
+---
 
 
 
@@ -226,7 +227,7 @@ int main()
 
 ![unique_ptr_6](/assets/img/unique_ptr_6.png)
 
---
+---
 
 
 
@@ -273,7 +274,7 @@ int main()
 위코드를 실행해보면 함수 객체의 Temp 변수크기만큼 unique_ptr의 크기가 증가한 것을 알 수 있다.
 ![unique_ptr_4](/assets/img/unique_ptr_4.png)
 
---
+---
 
 커스텀 삭제자로 함수객체를 이용했다. 사이즈를 확인하면 class Function에 있는 Temp 변수의 크기만큼 unique_ptr크기도 커진것을 알 수 있다.
 
