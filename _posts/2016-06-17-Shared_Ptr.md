@@ -2,7 +2,7 @@
 layout: post
 title: "SmartPointer - shared_ptr"
 author: "이인재"
-date: 2016-06-16 03:00:00
+date: 2016-06-17 03:00:00
 excerpt: "소유권 공유자원의 관리 -  shared_ptr"
 tags: [C++, Pointer, SmartPointer, shared_ptr]
 comments: true
