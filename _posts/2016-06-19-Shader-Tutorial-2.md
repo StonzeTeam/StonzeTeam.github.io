@@ -12,7 +12,7 @@ comments: true
 
 Tutorial 1을 바탕으로 이제 유용한 shader를 만들어 보도록 하겠습니다. 가장 기본적인 "Snow" shader를 만들도록 하겠습니다.
 
-![ShaderSampleImage](assets/img/Rocks.jpg)
+![ShaderSampleImage](/assets/img/Rocks.jpg)
 
 위의 이미지는 Asset Store에서 무료로 사용할 수 있는 울퉁불퉁한(bumped) 바위에 눈을 쌓이게 만든 예시입니다.
 
@@ -232,4 +232,3 @@ void vert (inout appdata_full v) {
 
 먼저 인자를 전달하여야 합니다. 함수에 전달되는 데이터이고, 우리는 *appdata_full*(Unity에서 제공하는) 사용합니다. *appdata_full* 두 종류의 텍스처 좌표, normal, 정점 위치, 탄젠트값을 가집니다. 여러분은 Input 데이터 구조체를 사용하여 두번째 인자로 다른 추가적인 정보도 픽셀 함수에 전달할 수 있습니다. Input 구조체에 필요한 값을 추가하기만 하면 됩니다. 우리의 경우는 그럴 필요가 없습니다.
 
-  

@@ -225,7 +225,7 @@ Sampler2D _MainTex;
 
 우리는 Properties 부분에서 정의한 모든 property에 접근하기 위해서 반드시 CG 프로그램에 변수를 넣어주어야 합니다. 변수명은 반드시 property와 동일한 이름이어야 합니다.
 
-![ShaderEx1](/assets/img/CGVariable.png)
+![ShaderEx1](/assets/img/CGVariables.png)
 
 uv 혹은 uv2에 상관없이 텍스처 좌표를 얻기 위해서는 Input 구조체에 반드시 동일한 이름을 사용해야 합니다.
 
