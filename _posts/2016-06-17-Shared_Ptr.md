@@ -322,7 +322,7 @@ shared_ptr<WidgetClass> spW2(spW1);
 그리고 처리가 끝난 위젯들을 vector에 추가하여 관리하고자 하는 코드다
 ( 예시를 위한 코드이니, 전역 변수로 vector를 선언한 것에 대해서는 비적절하다고 판단할 수 있다)
 
-{% highlight cpp linenos %}
+{% highlight cpp %}
 
 class WidgetClass;
 vector<shared_ptr<WidgetClass>> ProcessedWidgets;
@@ -410,7 +410,7 @@ shared_from_this()를 호출하기 위해서는 이미 이 객체를 가리키�
 그런 shared_ptr가 존재하지 않는다면(즉, 이 객체에 대한 제어블록이 없다는 말과 동일) 미정의 행동을 유발한다. 
 다음의 코드는 WidgetClass를 raw_pointer가 관리하도록 바꾼 소스코드다. 이 코드는 미정의 행동을 유발한다.
 
-{% highlight cpp  linenos  %}
+{% highlight cpp %}
 
 class WidgetClass;
 vector<shared_ptr<WidgetClass>> ProcessedWidgets;
@@ -439,8 +439,6 @@ public:
              ProcessedWidgets.emplace_back(shared_from_this());
        }
 };
-
-
 
 int main()
 {
