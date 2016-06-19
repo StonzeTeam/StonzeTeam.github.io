@@ -147,3 +147,89 @@ void surf (Input IN, inout SurfaceOutput o) {
     o.Alpha = 1;
 }
 {% endlight %}
+
+이제 모든 마법이 펼쳐지는 *if*문에서 대해서 해부해보도록 하겠습니다.
+
+* 우리는 두 벡터의 *내적* 결과를 얻을 것입니다. 하나의 벡터는 눈이 내리는 방향이고, 다른 하나는 픽셀의 normal에 사용될 벡터입니다. 이 픽셀의 normal은 이 점과 bump map의 world normal 조합입니다. 우리는 ㅜnormal을 Input 구조체의 INTERNAL_DATA와 bump map의 픽셀 normal을 사용해서 전달할 수 있는 *WorldNormalVecto*를 호출하여 필요한 normal을 얻을 수 있습니다. 이 *내적* 결과는 당연하지만 -1 ~ 1 사이의 입니다.
+* 우리는 내적 결과를 lerp를 이용해서 비교합니다. 만약 Snow 수치가 0이면 비교 결과 1을 반환합니다. 만약 Snow 수치가 1이면 비교 결과 -1을 반환합니다(그렇게 되면 전체 바위가 눈으로 덮히게 됩니다). Snow 수치가 0 ~ 0.5 사이라면 결과는 이상하지 않을 것입니다. 적당한 수치가 설정이 되면 실제로 눈이 내리는 방향을 바라보는 표면만 눈으로 덮힐 것입니다.
+* 만약 내적의 결과가 snow 수치를 lerp한 값도가 크면 snow color를 사용하고, 아니라면 텍스처 color를 사용합니다.
+
+{% highlight glsl %}
+Shader "Custom/SnowShader" {
+    Properties {
+        _MainTex ("Base (RGB)", 2D) = "white" {}
+        _Bump ("Bump", 2D) = "bump" {}
+        _Snow ("Snow Level", Range(0,1) ) = 0
+        _SnowColor ("Snow Color", Color) = (1.0,1.0,1.0,1.0)
+        _SnowDirection ("Snow Direction", Vector) = (0,1,0)
+        _SnowDepth ("Snow Depth", Range(0,3)) = 0.1
+    }
+    SubShader {
+        Tags { "RenderType"="Opaque" }
+        LOD 200
+ 
+        CGPROGRAM
+        #pragma surface surf Lambert
+ 
+        sampler2D _MainTex;
+        sampler2D _Bump;
+        float _Snow;
+        float4 _SnowColor;
+        float4 _SnowDirection;
+        float _SnowDepth; 
+ 
+        struct Input {
+             float2 uv_MainTex;
+             float2 uv_Bump;
+             INTERNAL_DATA
+         };
+ 
+         void surf (Input IN, inout SurfaceOutput o) { 
+              //Normal color of a pixel
+              half4 c = tex2D (_MainTex, IN.uv_MainTex);
+ 
+              //Get the normal from the bump map
+              o.Normal = UnpackNormal (tex2D (_Bump, IN.uv_Bump));
+ 
+              //Get the dot product of the real normal vector and our snow direction
+              //and compare it to the snow level
+              if(dot(WorldNormalVector(IN, o.Normal), _SnowDirection.xyz)>=lerp(1,-1,_Snow))
+              //If this should be snow pass on the snow color
+                    o.Albedo = _SnowColor.rgb;
+              else
+                    o.Albedo = c.rgb;
+              o.Alpha = 1;
+         }
+         ENDCG
+    } 
+    FallBack "Diffuse"
+}
+{% endlight %}
+
+# 모델 변형하기
+
+마지막 단계는 모델을 크게 만드는 일입니다. (완벽하지는 않지만) 눈이 내리는 방향으로 크기를 키워야 합니다.
+
+이를 위해서 우리는 모델 정점을 수정하여야 합니다. 이는 surface shader에게 우리가 이런 기능을 수행할 함수를 작성한다는 것을 알려준다는 것을 의미합니다.
+
+{% highlight glsl %}
+#pragma surface surf Lambert vertex:vert
+{% endlight %}
+
+**pragma 끝부분에** 인자로 *vertex*를 추가하였습니다. 우리는 이 인자를 정점 함수 *vert*로 제공할 것입니다.
+
+이제 정점 함수 vert를 살펴봅시다.
+
+{% highlight glsl %}
+void vert (inout appdata_full v) {
+    //Convert the normal to world coordinates
+    float4 sn = mul(UNITY_MATRIX_IT_MV, _SnowDirection);
+    if(dot(v.normal, sn.xyz) >= lerp(1,-1, (_Snow*2)/3)){
+         v.vertex.xyz += (sn.xyz + v.normal) * _SnowDepth * _Snow;
+    }
+}
+{% endlight %}
+
+먼저 인자를 전달하여야 합니다. 함수에 전달되는 데이터이고, 우리는 *appdata_full*(Unity에서 제공하는) 사용합니다. *appdata_full* 두 종류의 텍스처 좌표, normal, 정점 위치, 탄젠트값을 가집니다. 여러분은 Input 데이터 구조체를 사용하여 두번째 인자로 다른 추가적인 정보도 픽셀 함수에 전달할 수 있습니다. Input 구조체에 필요한 값을 추가하기만 하면 됩니다. 우리의 경우는 그럴 필요가 없습니다.
+
+  
