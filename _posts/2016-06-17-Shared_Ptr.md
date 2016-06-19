@@ -322,7 +322,7 @@ shared_ptr<WidgetClass> spW2(spW1);
 그리고 처리가 끝난 위젯들을 vector에 추가하여 관리하고자 하는 코드다
 ( 예시를 위한 코드이니, 전역 변수로 vector를 선언한 것에 대해서는 비적절하다고 판단할 수 있다)
 
-{% highlight cpp  linenos %}
+{% highlight cpp linenos %}
 
 class WidgetClass;
 vector<shared_ptr<WidgetClass>> ProcessedWidgets;
@@ -350,8 +350,6 @@ public:
               ProcessedWidgets.emplace_back(this);
        }
 };
-
-
 
 int main()
 {
