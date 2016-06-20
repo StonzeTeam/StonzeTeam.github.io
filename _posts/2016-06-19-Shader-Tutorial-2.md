@@ -232,3 +232,70 @@ void vert (inout appdata_full v) {
 
 먼저 인자를 전달하여야 합니다. 함수에 전달되는 데이터이고, 우리는 *appdata_full*(Unity에서 제공하는) 사용합니다. *appdata_full* 두 종류의 텍스처 좌표, normal, 정점 위치, 탄젠트값을 가집니다. 여러분은 Input 데이터 구조체를 사용하여 두번째 인자로 다른 추가적인 정보도 픽셀 함수에 전달할 수 있습니다. Input 구조체에 필요한 값을 추가하기만 하면 됩니다. 우리의 경우는 그럴 필요가 없습니다.
 
+눈이 내리는 방향은 world 공간 내에 있습니다. 하지만 우리는 모델의 좌표계로 처리해야 합니다. 그래서 눈이 내리는 방향을 모델의 공간으로 변환해주어야 합니다. Unity에서 제공하는 행렬을 사용하여 곱해주면 변환이 이루어집니다.
+
+이제 정점의 normal을 눈이 내리는 방향에 적용하였던 계산과 동일한 과정으로 구해줍니다. 하지만 우리는 눈이 적당히 덮도록 하기 위해서 snow 수치를 2/3으로 스케일했습니다.
+
+정정의 normal과 눈이 내리는 방향을 더한 결과를 *_SnowDepth*와 *_Snow*를 곱하여 준 후, 이 결과를 다시 정점에 더하였습니다. 이 과정을 통해서 정점은 눈이 내리는 방향을 향해 움직이게 됩니다. 그리고 snow 수치가 증가할 수록 이 효과는 커집니다.
+
+# Source Code
+
+이제 전체 코드를 확인해보겠습니다.
+
+{% highlight glsl %}
+Shader "Custom/SnowShader" {
+    Properties {
+        _MainTex ("Base (RGB)", 2D) = "white" {}
+        _Bump ("Bump", 2D) = "bump" {}
+        _Snow ("Snow Level", Range(0,1) ) = 0
+        _SnowColor ("Snow Color", Color) = (1.0,1.0,1.0,1.0)
+        _SnowDirection ("Snow Direction", Vector) = (0,1,0)
+        _SnowDepth ("Snow Depth", Range(0,0.2)) = 0.1
+    }
+    SubShader {
+        Tags { "RenderType"="Opaque" }
+        LOD 200
+ 
+        CGPROGRAM
+        #pragma surface surf Lambert vertex:vert 
+ 
+        sampler2D _MainTex;
+        sampler2D _Bump;
+        float _Snow;
+        float4 _SnowColor;
+        float4 _SnowDirection;
+        float _SnowDepth; 
+ 
+        struct Input {
+             float2 uv_MainTex;
+             float2 uv_Bump;
+             float3 worldNormal;
+             INTERNAL_DATA
+        };
+ 
+        void vert (inout appdata_full v) {
+             //Convert the normal to world coordinates
+             float4 sn = mul(UNITY_MATRIX_IT_MV, _SnowDirection);
+ 
+             if(dot(v.normal, sn.xyz) >= lerp(1,-1, (_Snow*2)/3)){
+                  v.vertex.xyz += (sn.xyz + v.normal) * _SnowDepth * _Snow;
+             }
+        }
+ 
+        void surf (Input IN, inout SurfaceOutput o) { 
+             half4 c = tex2D (_MainTex, IN.uv_MainTex);
+             o.Normal = UnpackNormal (tex2D (_Bump, IN.uv_Bump));
+             if(dot(WorldNormalVector(IN, o.Normal), _SnowDirection.xyz)>=lerp(1,-1,_Snow))
+                 o.Albedo = _SnowColor.rgb;
+             else
+                 o.Albedo = c.rgb;
+             o.Alpha = 1;
+        }
+        ENDCG
+    } 
+    FallBack "Diffuse"
+}
+
+{% endlight %}
+
+[참고자료]https://unitygem.wordpress.com/shader-part-2/
