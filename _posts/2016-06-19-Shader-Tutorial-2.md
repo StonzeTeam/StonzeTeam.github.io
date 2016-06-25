@@ -68,14 +68,14 @@ Shader "Custom/SnowShader" {
 
 * 기본 "bump"(빈 normal map)를 사용한 2D 이미지인 *_Bump*라는 property를 정의합니다.
 * sampler2D를 **같은 이름**으로 만듭니다(Shader Tutorial 1을 참고하시면 됩니다).
-* Bump(**다시 동일한 이름으로**)에 사용할 uv 좌표를 받도록 *Input* 내부에 목록을 만듭니다.  
+* *_Bump*(**다시 동일한 이름으로**)에 사용할 uv 좌표를 받도록 *Input* 내부에 목록을 만듭니다.  
 * *UnpackNormal* 함수를 호출하는 코드를 추가합니다. 이 함수는 normal map 텍스처를 가지고, normal로 그 결과를 변환합니다. 우리는 *tex2D*와 *_Bump* 변수, *Input* 구조체 내부의 uv 좌표를 사용하여 텍스처의 픽셀에 normal을 전달합니다.
 
 이것으로 우리는 평범한 bumped shader를 만들었습니다.
 
 # 2단계 - 눈 추가하기
 
-이번 단계에서 우리는 픽셀의 normal이 눈이 내려오는 방향과 동일하게 만들어 주어야 합니다.
+이번 단계에서 우리는 픽셀의 normal이 눈을 향하도록 만들어 주어야 합니다.
 
 이를 위해서 *내적*을 사용할 것입니다. 두 단위 벡터 사이의 *내적*은 그 벡터들 사이 각도의 코사인 값과 같습니다. CG는 *내적*을 계산해주는 *dot* 함수를 제공합니다. *내적*의 결과는 두 벡터가 같은 방향을 가리키면 1, 반대 방향을 가리키면 -1이 됩니다. 그래서 우리는 구체적인 각도를 알 필요가 없습니다. 단지 픽셀의 normal과 눈이 내리는 방향 사이의 *내적* 결과만 있으면 됩니다. 
 
@@ -112,7 +112,7 @@ float4 _SnowDirection;
 float _SnowDepth;
 {% endlight %}
 
-우리가 어떻게 모든 것들을, 텍스처 sampler를 제외하고, 다른 크기의 float처럼 다룰 수 있는지 알아두시오. Cg 부분은 CGPROGRAM과 ENDCG 사이입니다. Cg는 Unity shader 시스템인 ShaderLab을 사용하는 다른 shader 부분과는 독립적입니다. Properties 부분에 정의된 property들은 ShaderLab에 속하고, property들은 Cg와 연결되어야 합니다. 이것이 바로 property들의 이름을 똑같이 설정해야 하는 이유입니다. ShaderLab 컴파일러는 이름을 통해서 ShaderLab과 Cg을 연결합니다.
+우리가 어떻게 모든 것들을, 텍스처 sampler를 제외하고, 다른 크기의 float로 다룰 수 있는지 알아두어야 합니다. Cg 부분은 CGPROGRAM과 ENDCG 사이입니다. Cg는 Unity shader 시스템인 ShaderLab을 사용하는 다른 shader 부분과는 독립적입니다. Properties 부분에 정의된 property들은 ShaderLab에 속하고, property들은 Cg와 연결되어야 합니다. 이것이 바로 property들의 이름을 똑같이 설정해야 하는 이유입니다. ShaderLab 컴파일러는 이름을 통해서 ShaderLab과 Cg을 연결합니다.
 
 다음에 우리는 Input을 shader에 업데이트해야 합니다. normal map 텍스처는 픽셀의 normal을 수정합니다. 하지만 우리가 원하는 연출은 world 공간의 normal로 변환된 결과가 필요합니다. 그리고 우리는 변환된 결과를 눈이 내리는 방향과 비교할 수 있습니다.
 
