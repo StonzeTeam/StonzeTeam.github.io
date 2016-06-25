@@ -62,7 +62,7 @@ Shader "Custom/SnowShader" {
     } 
     FallBack "Diffuse"
 }
-{% endlight %}
+{% endhighlight %}
 
 이것은 Unity가 자동으로 생성해주는 Bump 효과를 추가하는 shader입니다.
 
@@ -92,7 +92,7 @@ Properties {
     _SnowDirection ("Snow Direction", Vector) = (0,1,0)
     _SnowDepth ("Snow Depth", Range(0,0.3)) = 0.1
 }
-{% endlight %}
+{% endhighlight %}
 
 Properties에 추가된 것은 다음과 같습니다.
 
@@ -110,7 +110,7 @@ float _Snow;
 float4 _SnowColor;
 float4 _SnowDirection;
 float _SnowDepth;
-{% endlight %}
+{% endhighlight %}
 
 우리가 어떻게 모든 것들을, 텍스처 sampler를 제외하고, 다른 크기의 float로 다룰 수 있는지 알아두어야 합니다. Cg 부분은 CGPROGRAM과 ENDCG 사이입니다. Cg는 Unity shader 시스템인 ShaderLab을 사용하는 다른 shader 부분과는 독립적입니다. Properties 부분에 정의된 property들은 ShaderLab에 속하고, property들은 Cg와 연결되어야 합니다. 이것이 바로 property들의 이름을 똑같이 설정해야 하는 이유입니다. ShaderLab 컴파일러는 이름을 통해서 ShaderLab과 Cg을 연결합니다.
 
@@ -125,7 +125,7 @@ struct Input {
     float3 worldNormal;
     INTERNAL_DATA
 };
-{% endlight %}
+{% endhighlight %}
 
 이제 드디어 shader 프로그램을 작성할 준비가 되었습니다.
 
@@ -146,7 +146,7 @@ void surf (Input IN, inout SurfaceOutput o) {
         o.Albedo = c.rgb;
     o.Alpha = 1;
 }
-{% endlight %}
+{% endhighlight %}
 
 이제 모든 마법이 펼쳐지는 *if*문에서 대해서 해부해보도록 하겠습니다.
 
@@ -204,7 +204,7 @@ Shader "Custom/SnowShader" {
     } 
     FallBack "Diffuse"
 }
-{% endlight %}
+{% endhighlight %}
 
 # 모델 변형하기
 
@@ -214,7 +214,7 @@ Shader "Custom/SnowShader" {
 
 {% highlight glsl %}
 #pragma surface surf Lambert vertex:vert
-{% endlight %}
+{% endhighlight %}
 
 **pragma 끝부분에** 인자로 *vertex*를 추가하였습니다. 우리는 이 인자를 정점 함수 *vert*로 제공할 것입니다.
 
@@ -228,7 +228,7 @@ void vert (inout appdata_full v) {
          v.vertex.xyz += (sn.xyz + v.normal) * _SnowDepth * _Snow;
     }
 }
-{% endlight %}
+{% endhighlight %}
 
 먼저 인자를 전달하여야 합니다. 함수에 전달되는 데이터이고, 우리는 *appdata_full*(Unity에서 제공하는) 사용합니다. *appdata_full* 두 종류의 텍스처 좌표, normal, 정점 위치, 탄젠트값을 가집니다. 여러분은 Input 데이터 구조체를 사용하여 두번째 인자로 다른 추가적인 정보도 픽셀 함수에 전달할 수 있습니다. Input 구조체에 필요한 값을 추가하기만 하면 됩니다. 우리의 경우는 그럴 필요가 없습니다.
 
@@ -296,6 +296,6 @@ Shader "Custom/SnowShader" {
     FallBack "Diffuse"
 }
 
-{% endlight %}
+{% endhighlight %}
 
 [참고자료]https://unitygem.wordpress.com/shader-part-2/

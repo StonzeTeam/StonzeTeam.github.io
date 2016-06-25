@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Functional Reactive Programming for RxSwift"
+title: "Functional Reactive Programming with RxSwift"
 author: "이선협"
 date: 2016-05-22 03:50:00
 excerpt: "FRP가 무엇인지 알아보고 FRP를 사용하는 법을 RxSwift를 통해 알아봅시다."
