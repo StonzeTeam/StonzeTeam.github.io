@@ -55,7 +55,7 @@ Property 설정은 쉐이더 코드의 sampler2D _MainTex와 깊은 관련이 �
 
 특별한 내용이 아닙니다. Diffuse Shader에서 텍스처만 적용하면 끝납니다. 그리고 이 쉐이더는 바로 위에 있는 코드입니다. 이에 관한 내용은 벌써 위에서 설명하였습니다. Property에서 텍스처를 설정하여 유니티 엔진 상에서 설정할 수 있도록 하고, 이 텍스처를 쉐이더 코드와 연결합니다. 그리고 surf 함수를 통해서 텍스처의 색상값을 읽어서 SurfaceOutput에 적용합니다. 이 과정은 tex2D 함수를 통해서 이뤄집니다. 이 쉐이더 코드를 바탕으로 Bumpmap을 적용하도록 해보겠습니다. Bumpmap을 적용하기 전에 비교대상으로 Diffuse Texture Shader을 적용한 결과를 보도록 하겠습니다.
 
-![_MainTexture](/assets/img/DiffuseTexture.png)
+![DiffuseTexture](/assets/img/DiffuseTexture.png)
 
 # Bumpmap Shader
 
@@ -122,13 +122,13 @@ inline fixed3 UnpackNormal(fixed4 packednormal)
 함수는 매우 단순합니다. 이 함수의 기능 또한 방금 설명한 내용 그대로 입니다. 정의된 값에 의해서 처리하는 방식이 조금 다를 뿐입니다. SHADER_API_GLES와 SHADER_API_MOBILE가 정의되어 있다면 간편하게 벡터 자체를 2배하고 1을 빼주어서 처리할 수 있습니다. 그 외의 경우에는 xy 벡터로부터 z 값을 계산해내는 것입니다. 보통 Normal Map으로 사용되는 텍스처는 RG 채널만 벡터를 표현하기 위해서 사용됩니다. 왜냐하면 RG 채널로부터 B 채널을 계산해낼 수 있기 때문입니다. 이는 Normal의 크기는 1으로 정의되어 있기 때문입니다. 그러면 사용하지 않는 B 채널은 다른 곳에 이용할 수 있게 됩니다. 보통은 B 채널을 광 차폐 정도, 주변 법선 벡터와 각도 차이들은 표현하는데 사용된다고 합니다.
 결국 UnpackNoraml을 사용하면 궁극적으로 RGB로부터 xyz 벡터를 추출할 수 있게 됩니다. BumpMap을 적용하기 위한 준비는 모두 끝났습니다. 결과는 다음과 같습니다.
 
-![_MainTexture](/assets/img/Bumpmap.png)
+![Bumpmap](/assets/img/Bumpmap.png)
 
 # Rim Lighting Shader
 
 이제 마지막으로 Rim Lighting Shader를 살펴볼 차례입니다. 글로 설명하지말고 바로 Rim Lighting이 무엇인지 사진을 통해서 보도록 하겠습니다.
 
-![_MainTexture](/assets/img/RimLighting.jpeg)
+![RimLighting](/assets/img/RimLighting.jpeg)
 
 사진을 살펴보면 뒤에서 빛이 쏘아지고 있고, 인물의 외곽선 따라서 빛이 반사되어 밝게 보입니다. 이 효과가 바로 Rim Lighting입니다. 눈으로 확인하면 금방 알 수 있습니다. 우리는 지금부터 쉐이더를 사용하여 이 효과를 흉내내도록 할 예정입니다. 거창하게 시작하지만 매우 단순한 형태로 구현하도록 하겠습니다. Rim Lighting을 표현하는 기본적인 아이디어를 맛본다고 생각하시면 됩니다.
 
