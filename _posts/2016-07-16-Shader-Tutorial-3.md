@@ -44,7 +44,7 @@ Shader "Example/Diffuse Texture" {
 
 * Property: 유니티 에디터의 inspector 기능과 관련이 있습니다. 보통 shader를 material에 추가하여 사용하게 되는데, 이때 property로 설정한 것들은 유니티 에디터에서 직접 값을 수정할 수 있게 됩니다. 위의 쉐이더 코드에서 _MainTex ("Texture", 2D) = "white" {} 로 설정한 부분이 있습니다. 이 쉐이더를 적용한 material의 inspector를 유니티 에디터 상에서 살펴보면 다음과 같은 모습을 볼 수 있습니다.
 
-![_MainTexture](/assets/img/_MainTextureInspector.png)
+![MainTexture](/assets/img/MainTextureInspector.png)
 
 Property에서 "Texture"라는 이름으로 2D 텍스처를 설정할 수 있도록 해두었고, 이를 이제 Inspector를 통해서 확인할 수 있습니다. 물론 Inspector 상에서 수정도 가능합니다.
 Property 설정은 쉐이더 코드의 sampler2D _MainTex와 깊은 관련이 있습니다. Property 설정은 어디까지나 Inspector 상에서 이루어지는 유니티 엔진의 고유한 기능입니다. 정확히는 Unity ShaderLab에서 제공하는 기능입니다. 이를 연결하는 과정에 대한 자세한 설명은 Shader Tutorial 1에서 확인할 수 있습니다. 여기서는 간단하게 Property와 이름을 동일하게 변수명을 정해야 한다는 정도로만 언급하고 넘어가도록 하겠습니다.
@@ -180,7 +180,7 @@ Diffuse Texture Shader에서 추가된 부분을 살펴보겠습니다. 먼저 I
 
 ![RimLighting1](/assets/img/RimLighting1.png)
 
-# 좀더 완성되 높은 아이디어
+# 좀더 완성도 높은 아이디어
 
 여러분의 예상과는 다른 결과일 것입니다. 외곽 부분만 멋있게 빛나는 효과가 연출될 것이라고 기대했지만 결과는 예상과는 다르게 전체적으로 흰색으로 덮혀있습니다. 하지만 외곽으로 갈수록 효과는 강해진다는 것은 확인할 수 있습니다. 안쪽은 효과를 약하게 만들고, 바깥쪽은 효과를 강하게 만든다면 원하던 결과에 가까워질 것 같습니다. 이왕이면 외곽에 매우 근접한 부분만 빛나면 더욱 좋을 것 같습니다. 한번에 원하는 효과를 코드로 얻어내기는 힘들 수 있습니다. 수치를 수정하면서 원하는 결과를 찾아야 합니다. 이럴때 Property는 매우 유용하게 사용할 수 있습니다. 유니티 에디터에서 쉐이더과 관련된 데이터를 조절할 수 있고 그 결과를 바로 확인할 수 있기 때문입니다. 적절하게 Property로 추가하도록 하겠습니다. Rim Lighting의 색상을 추가해보겠습니다. 마지막으로 Rim Lighting의 강도 또한 설정할 수 있도록 하겠습니다. 이 강도는 얼마나 외곽에 집중되어 나타날지를 정합니다. 다음은 완성된 코드입니다.
 
