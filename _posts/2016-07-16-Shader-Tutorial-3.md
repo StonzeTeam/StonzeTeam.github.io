@@ -1,5 +1,3 @@
-2016-07-16-Shader-Tutorial-3
-
 ---
 layout: post
 title: "Shader Tutorial 3"
