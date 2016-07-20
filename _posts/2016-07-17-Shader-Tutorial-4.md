@@ -146,7 +146,7 @@ Shader "Custom/DetailTextureInScreenSpace" {
 
 처음으로 반사가 등장하였습니다. 반사라는 용어를 사용하지만 사실은 맵핑의 한 종류입니다. 큐브로 구성된 텍스처를 물체에 적용하는 것입니다. 먼저 기본적인 Cubemap Reflection의 개념을 살펴보도록 하겠습니다.
 
-![CubemapReflection](/asstes/img/cubemapReflection.jpg)
+![CubemapReflection](/assets/img/cubemapReflection.jpeg)
 [출처](https://en.wikibooks.org/wiki/Cg_Programming/Unity/Reflecting_Surfaces)
 
 큐브맵은 스카이박스로 생각하시면 됩니다. 우리의 목표는 물체에 이 스카이박스의 이미지를 텍스처 맵핑하는 것입니다. 텍스처 맵핑이 목표이므로 필요한 것은 2가지입니다. 텍스처와 uv 좌표입니다. Detail Texture Shader에서는 정점 정보에 포함된 uv 좌표를 사용하였습니다. Detail Texture Shader in Screen Space에서는 정점이 랜더링될 스크린 공간으로부터 uv 좌표를 얻었습니다. 이번에는 조금 복잡한 과정을 거쳐서 uv 좌표를 얻어와야 합니다. 카메라 레이가 물체와 만나는 지점이 있습니다. 이 지점의 Normal 벡터를 통해서 반사 벡터를 구할 수 있습니다. 그리고 이 지점에서 반사 벡터 방향으로 레이를 만듭니다. 이 레이는 스카이박스와 만나게 됩니다. 이 만드는 지점의 색상값이 바로 물체의 맵핑될 텍스처의 색상값이 됩니다. 이 과정을 설명한 것이 위의 그림입니다. 그림으로 살펴보면 그렇게 복잡하지 않습니다. 그러나 내부적으로 본다면 카메라 레이와 물체가 만나는 지점을 검출해야 하고, 그 지점의 Normal 벡터를 통해 반사 벡터를 구해야 합니다. 이 지점으로부터 또 다시 반사 벡터 방향으로 만든 레이와 큐브맨이 만나는 지점을 검출해야 합니다. 상당히 복잡한 과정입니다. 하지만 이런 과정들은 쉐이더 코드로 작성할 필요는 없습니다. CG에서 제공하는 유용한 함수들을 사용할 수 있기 때문입니다. 이 복잡한 내용들은 매우 간단한 쉐이더 코드로 표현될 수 있습니다. 
