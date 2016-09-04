@@ -2,7 +2,7 @@
 layout: post
 title: "Shader Tutorial 6"
 author: "장문익"
-date: 2016-08-21 03:00:00
+date: 2016-09-03 03:00:00
 excerpt: "특정 영역을 랜더링하지 않는 쉐이더를 작성해봅시다"
 tags: [Shader, Clip, Texture Scrolling, Surface Shader, Unity]
 comments: true
